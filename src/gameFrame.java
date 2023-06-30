@@ -18,6 +18,7 @@ public class gameFrame extends JFrame implements ActionListener {
     JLabel scoreLabel;
 
     gameFrame(){
+        game.setVisible(false);
         scoreLabel =  new JLabel();
         this.setTitle("Main Menu");
         this.setSize(WIDTH,HEIGHT);
@@ -71,6 +72,7 @@ public class gameFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.dispose();
         this.setVisible(false);
+        game.setVisible(true);
         int screenMode = darkMode.isSelected()?1:2;
         game.createPanel(screenMode);
 
