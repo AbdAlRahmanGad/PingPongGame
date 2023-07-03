@@ -7,7 +7,8 @@ This is a simple project introducing the classic old game
 
 
 
-https://github.com/AbdAlRahmanGad/PingPongGame/assets/89566409/7b1992f3-570e-4559-86a5-2a152eea019a
+
+https://github.com/AbdAlRahmanGad/PingPongGame/assets/89566409/22cc3b83-6b6b-4159-a007-34ba207bd18c
 
 
 
