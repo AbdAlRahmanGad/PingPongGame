@@ -1,5 +1,5 @@
     public class Main {
-        public static gameFrame gameF= new gameFrame();
+        public static MainMenu gameF= new MainMenu();
 
         public static void main(String[] args) {
             makeFrame(-1);

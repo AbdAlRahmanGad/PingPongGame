@@ -3,21 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class gameFrame extends JFrame implements ActionListener {
+public class MainMenu extends JFrame implements ActionListener {
     private JButton myButton = new JButton("Play Again");
     private int WIDTH = 400;
     private int HEIGHT = 300;
 
     private JRadioButton darkMode;
     private JRadioButton lightMode;
-    private Frame game = new Frame();
+    private GameFrame game = new GameFrame();
     private JLabel scrLabel;
     private JLabel empty1;
     private JLabel empty2;
     private JLabel empty3;
     JLabel scoreLabel;
 
-    gameFrame(){
+    MainMenu(){
         game.setVisible(false);
         scoreLabel =  new JLabel();
         this.setTitle("Main Menu");

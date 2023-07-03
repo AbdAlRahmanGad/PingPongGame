@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 import static java.lang.Math.abs;
 
-public class Panel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
     private final int panelWidth = 700;
     private final int panelHeight = 400;
 
@@ -35,7 +35,7 @@ public class Panel extends JPanel implements Runnable {
 
     private boolean isPlayerOneUp, isPlayerOneDown, isPlayerTwoUp, isPlayerTwoDown;
 
-    Panel(int scrMode) {
+    GamePanel(int scrMode) {
         controls();
         screenMode = scrMode;
         if (screenMode == 1) {

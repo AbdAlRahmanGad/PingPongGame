@@ -1,13 +1,13 @@
 import javax.swing.*;
 
-public class Frame extends JFrame {
-    Frame(){
+public class GameFrame extends JFrame {
+    GameFrame(){
         this.setVisible(true);
         this.setResizable(false);
     }
     public void createPanel(int scrMode){
-        Panel myPanel ;
-        myPanel = new Panel(scrMode);
+        GamePanel myPanel ;
+        myPanel = new GamePanel(scrMode);
         this.add(myPanel);
         this.pack();
     }
