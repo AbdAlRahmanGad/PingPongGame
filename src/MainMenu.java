@@ -10,8 +10,11 @@ public class MainMenu extends JFrame implements ActionListener {
 
     private JRadioButton darkMode;
     private JRadioButton lightMode;
+    private JRadioButton singlePlayer;
+    private JRadioButton multiPlayer;
     private GameFrame game = new GameFrame();
     private JLabel scrLabel;
+    private JLabel playerModeLabel;
     private JLabel empty1;
     private JLabel empty2;
     private JLabel empty3;
@@ -26,15 +29,22 @@ public class MainMenu extends JFrame implements ActionListener {
         darkMode = new JRadioButton("Dark Mode");
         lightMode = new JRadioButton("Light Mode");
         scrLabel = new JLabel(" Screen Mode");
+        playerModeLabel = new JLabel("Player Mode");
+        singlePlayer = new JRadioButton("1 player");
+        multiPlayer = new JRadioButton("2 players");
         empty1 = new JLabel("");
         empty2 = new JLabel("");
         empty3 = new JLabel("");
         ButtonGroup mode = new ButtonGroup();
+        ButtonGroup playerMode = new ButtonGroup();
         mode.add(darkMode);
         mode.add(lightMode);
+        playerMode.add(singlePlayer);
+        playerMode.add(multiPlayer);
 
         myButton.addActionListener(this);
         darkMode.setSelected(true);
+        singlePlayer.setSelected(true);
 
 
         this.setResizable(false);
@@ -50,19 +60,21 @@ public class MainMenu extends JFrame implements ActionListener {
         scoreLabel.setForeground(Color.BLACK);
         if(winner == -1){
             myButton.setText("Play");
-            this.setLayout(new GridLayout(2,1));
+            this.setLayout(new GridLayout(3,1));
 
         }else{
-            this.setLayout(new GridLayout(3,1));
-            this.add(empty1).setVisible(false);
-            this.add(scoreLabel);
-            this.add(empty2).setVisible(false);
+            this.setLayout(new GridLayout(4,1));
+            this.add(empty1,1).setVisible(false);
+            this.add(scoreLabel,2);
+            this.add(empty2,3).setVisible(false);
         }
         this.setVisible(true);
         this.add(scrLabel);
         this.add(darkMode);
         this.add(lightMode);
-
+        this.add(playerModeLabel);
+        this.add(singlePlayer);
+        this.add(multiPlayer);
         this.add(empty3).setVisible(false);
         this.add(myButton);
     }
@@ -74,7 +86,8 @@ public class MainMenu extends JFrame implements ActionListener {
         this.setVisible(false);
         game.setVisible(true);
         int screenMode = darkMode.isSelected()?1:2;
-        game.createPanel(screenMode);
+        int playerMode = singlePlayer.isSelected()?1:2;
+        game.createPanel(screenMode,playerMode);
 
     }
 }

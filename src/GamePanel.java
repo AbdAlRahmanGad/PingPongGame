@@ -34,15 +34,20 @@ public class GamePanel extends JPanel implements Runnable {
     private final int screenMode;
 
     private boolean isPlayerOneUp, isPlayerOneDown, isPlayerTwoUp, isPlayerTwoDown;
-
-    GamePanel(int scrMode) {
-        controls();
+    private boolean isSinglePlayer;
+    GamePanel(int scrMode,int playerMode) {
         screenMode = scrMode;
         if (screenMode == 1) {
             setBackground(Color.black);
         } else {
             setBackground(Color.WHITE);
         }
+        if (playerMode == 1) {
+            isSinglePlayer = true;
+        } else {
+            isSinglePlayer = false;
+        }
+        controls();
         setPreferredSize(new Dimension(panelWidth, panelHeight));
         startGameThread();
         this.setFocusable(true);
@@ -115,6 +120,29 @@ public class GamePanel extends JPanel implements Runnable {
         }
         moveBall();
     }
+    private void moveAI() {
+
+        if((ballY >= strock2Y || ballY + ballHeight >= strock2Y) && ballY <= strock2Y + strockHeight){
+
+        }else{
+            if(ballY < strock2Y){
+                if(ballX < panelWidth/2)
+                    strock2Y-=1;
+                else if(ballX < panelWidth/2 +panelWidth/4 )
+                    strock2Y-=3;
+                else
+                    strock2Y-=5;
+            }else{
+                if(ballX < panelWidth/2)
+                    strock2Y+=1;
+                else if(ballX < panelWidth/2 +panelWidth/4 )
+                    strock2Y+=3;
+                else
+                    strock2Y+=5;
+            }
+        }
+
+    }
 
     private void moveBall() {
 //        ballMovement
@@ -125,6 +153,9 @@ public class GamePanel extends JPanel implements Runnable {
             ballMovementY = -abs(ballMovementY);
         } else if (ballY < 0) {
             ballMovementY = abs(ballMovementY);
+        }
+        if(isSinglePlayer){
+            moveAI();
         }
 
         movePlayerOne();
@@ -144,6 +175,8 @@ public class GamePanel extends JPanel implements Runnable {
             endGame(2);
         }
     }
+
+
 
     private void endGame(int winner) {
 //        winner = 1 || 2
@@ -170,7 +203,7 @@ public class GamePanel extends JPanel implements Runnable {
         playerTwoScore++;
         ballX = panelWidth / 2 - ballWidth;
     }
-
+//    ballX + ballWidth <= strock2X
     private void movePlayerTwo() {
         //Payer 2 controls
         if (ballX + ballWidth >= strock2X
@@ -289,34 +322,36 @@ public class GamePanel extends JPanel implements Runnable {
                 isPlayerOneDown = false;
             }
         });
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0, false), "p2UpPressed");
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0, true), "p2UpReleased");
-        am.put("p2UpPressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isPlayerTwoUp = true;
-            }
-        });
-        am.put("p2UpReleased", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isPlayerTwoUp = false;
-            }
-        });
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false), "p2DownPressed");
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, true), "p2DownReleased");
-        am.put("p2DownPressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isPlayerTwoDown = true;
-            }
-        });
-        am.put("p2DownReleased", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                isPlayerTwoDown = false;
-            }
-        });
+        if(!isSinglePlayer) {
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0, false), "p2UpPressed");
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0, true), "p2UpReleased");
+            am.put("p2UpPressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    isPlayerTwoUp = true;
+                }
+            });
+            am.put("p2UpReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    isPlayerTwoUp = false;
+                }
+            });
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false), "p2DownPressed");
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, true), "p2DownReleased");
+            am.put("p2DownPressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    isPlayerTwoDown = true;
+                }
+            });
+            am.put("p2DownReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    isPlayerTwoDown = false;
+                }
+            });
+        }
 
 
     }
